@@ -1,0 +1,24 @@
+[placeholders.license]
+type = "string"
+prompt = "What license to use?"
+choices = ["MIT", "Unlicense"]
+
+[placeholders.use_workspaces]
+type = "bool"
+prompt = "Use workspaces for this projects?"
+default = false
+
+[conditional.'!use_workspaces']
+ignore = ["crates"]
+
+[conditional.'crate_type == "lib"']
+ignore = ["bin"]
+
+[conditional.'license == "MIT"']
+ignore = ["LICENSE-UNLICENSE"]
+
+[conditional.'license == "Unlicense"']
+ignore = ["LICENSE-MIT"]
+
+[template]
+ignore = ["Cargo.lock"]
